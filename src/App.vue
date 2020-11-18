@@ -5,9 +5,20 @@
 </template>
 
 <script>
-// import axios from "axios"; //fazer requisições http dentro desse componente vue
+import axios from "axios"; //fazer requisições http dentro desse componente vue
 export default {
-  name: 'App'
+  name: 'App',
+  data(){
+    return {
+      pokemons: []
+    }
+  },
+  created: function(){
+    axios.get('https://pokeapi.co/api/v2/pokemon?limit=151&offset=0').then(res => {
+      console.log('pegou a lista de pokemons');
+      this.pokemons = res.data.results;
+    })
+  }
 }
 </script>
 
